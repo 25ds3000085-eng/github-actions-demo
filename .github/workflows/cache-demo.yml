@@ -1,0 +1,29 @@
+name: Cache Demo
+
+on: [push]
+
+jobs:
+  cache-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Cache dependencies
+      - name: Cache dependencies
+        id: cache-step
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: cache-0504214
+
+      # Required step
+      - name: prime-cache-0504214
+        run: |
+          echo "Cache hit: ${{ steps.cache-step.outputs.cache-hit }}"
+
+      # Install dependencies (for demo)
+      - name: Install dependencies
+        run: npm install || echo "No package.json found"
