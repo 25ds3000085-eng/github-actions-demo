@@ -12,18 +12,18 @@ jobs:
         uses: actions/checkout@v4
 
       # Cache dependencies
-      - name: Cache dependencies
+      - name: Cache npm dependencies
         id: cache-step
         uses: actions/cache@v4
         with:
           path: ~/.npm
           key: cache-0504214
 
-      # Required step
+      # REQUIRED STEP (DO NOT CHANGE NAME)
       - name: prime-cache-0504214
         run: |
           echo "Cache hit: ${{ steps.cache-step.outputs.cache-hit }}"
 
-      # Install dependencies (for demo)
+      # Install dependencies (demo)
       - name: Install dependencies
         run: npm install || echo "No package.json found"
